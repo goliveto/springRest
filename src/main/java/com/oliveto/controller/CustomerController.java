@@ -29,7 +29,7 @@ public class CustomerController {
 	private ConvertEntityToDto convert;
 
 	@RequestMapping(value = "/customers", method = RequestMethod.GET, headers = "Accept=application/json")
-	public List<CustomerDto> getCountries() {
+	public List<CustomerDto> getCustomers() {
 		List<Customer> listCustomers = customerService.getAllCustomers();
 		return listCustomers.stream().map(customer -> convert.customerToDto(customer)).collect(Collectors.toList());
 	}
@@ -77,7 +77,7 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "customers/filterByName/{name}/filterByAddress/{address}", method = RequestMethod.GET, headers = "Accept=application/json")
-	public List<CustomerDto> filterByAddress(@PathVariable("name") String name, @PathVariable("address") String address)
+	public List<CustomerDto> filterByName(@PathVariable("name") String name, @PathVariable("address") String address)
 			throws DataAPIException {
 		List<Customer> listCustomers = customerService.filterByNameAndAddress(name, address);
 		return listCustomers.stream().map(customer -> convert.customerToDto(customer)).collect(Collectors.toList());
